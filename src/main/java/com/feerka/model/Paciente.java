@@ -19,12 +19,12 @@ public class Paciente {
 	private Integer idPaciente;
 	
 	@NotNull
-	@Size(min= 3, message = "El nombre debe tener minimo 3 caracteres")
+	@Size(min= 3, message = "{nombres.size}")
 	@Column(name = "nombre", nullable = false, length = 70)
 	private String nombre;
 	
 	@NotEmpty
-	@Size(min= 3, message = "El apellido debe tener minimo 3 caracteres")
+	@Size(min= 3, message = "{apellidos.size}")
 	@Column(name = "apellido", nullable = false, length = 70)
 	private String apellido;
 	

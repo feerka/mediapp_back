@@ -35,7 +35,7 @@ public class Consulta {
 	
 	@ManyToOne
 	@JoinColumn(name="id_especialidad", nullable=false, foreignKey = @ForeignKey(name = "FK_consulta_especialidad"))
-	private Paciente especialidad;
+	private Especialidad especialidad;
 	
 	@Column(name = "num_consultorio",nullable = true, length = 3)
 	private String numConsultorio;
@@ -72,11 +72,11 @@ public class Consulta {
 		this.medico = medico;
 	}
 
-	public Paciente getEspecialidad() {
+	public Especialidad getEspecialidad() {
 		return especialidad;
 	}
 
-	public void setEspecialidad(Paciente especialidad) {
+	public void setEspecialidad(Especialidad especialidad) {
 		this.especialidad = especialidad;
 	}
 
