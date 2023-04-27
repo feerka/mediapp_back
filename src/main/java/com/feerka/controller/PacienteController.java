@@ -36,7 +36,7 @@ public class PacienteController {
 	@GetMapping
 	public ResponseEntity<List<Paciente>> listar ()throws Exception{
 		List<Paciente> lista = servicePac.listar();
-		return new ResponseEntity<List<Paciente>>(lista, HttpStatus.I_AM_A_TEAPOT);
+		return new ResponseEntity<List<Paciente>>(lista, HttpStatus.OK);
 	}
 	
 	@GetMapping("/{id}")

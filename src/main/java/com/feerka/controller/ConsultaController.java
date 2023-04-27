@@ -4,6 +4,8 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 import java.net.URI;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -27,6 +30,8 @@ import com.feerka.dto.ConsultaListaExamenDTO;
 import com.feerka.exception.ModeloNotFoundException;
 import com.feerka.model.Consulta;
 import com.feerka.service.IConsultaService;
+import com.feerka.dto.ConsultaResumenDTO;
+import com.feerka.dto.FiltroConsultaDTO;
 
 
 
@@ -105,6 +110,30 @@ public class ConsultaController {
 		}
 		service.eliminar(id);
 		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+	}
+	@GetMapping("/buscar")	
+	public ResponseEntity<List<Consulta>> buscarFecha(@RequestParam(value = "fecha")  String fecha) {		
+		List<Consulta> consultas = new ArrayList<>();	
+		
+		consultas = service.buscarFecha(LocalDateTime.parse(fecha));						
+		
+		return new ResponseEntity<List<Consulta>>(consultas, HttpStatus.OK);
+	}
+	
+	@PostMapping("/buscar/otros")
+	public ResponseEntity<List<Consulta>> buscarOtro(@RequestBody FiltroConsultaDTO filtro) {		
+		List<Consulta> consultas = new ArrayList<>();
+		
+		consultas = service.buscar(filtro);			
+		
+		return new ResponseEntity<List<Consulta>>(consultas, HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/listarResumen")
+	public ResponseEntity<List<ConsultaResumenDTO>> listarResumen() {
+		List<ConsultaResumenDTO> consultas = new ArrayList<>();
+		consultas = service.listarResumen();
+		return new ResponseEntity<List<ConsultaResumenDTO>>(consultas, HttpStatus.OK);
 	}
 	
 }
