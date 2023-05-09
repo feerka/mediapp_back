@@ -25,10 +25,11 @@ public class Usuario {
 	private String password;
 
 	@Column(name = "estado", nullable = false)
-	private String enabled;
-
+	private boolean enabled;	
+	
 	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "usuario_rol", joinColumns = @JoinColumn(name = "id_usuario", referencedColumnName = "idUsuario"), inverseJoinColumns = @JoinColumn(name = "id_rol", referencedColumnName = "idRol"))
+	@JoinTable(name = "usuario_rol", joinColumns = @JoinColumn(name = "id_usuario", referencedColumnName = "idUsuario"), 
+				inverseJoinColumns = @JoinColumn(name = "id_rol", referencedColumnName = "idRol"))
 	private List<Rol> roles;
 
 	public Integer getIdUsuario() {
@@ -55,11 +56,11 @@ public class Usuario {
 		this.password = password;
 	}
 
-	public String getEnabled() {
+	public boolean isEnabled() {
 		return enabled;
 	}
 
-	public void setEnabled(String enabled) {
+	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
 
@@ -70,5 +71,7 @@ public class Usuario {
 	public void setRoles(List<Rol> roles) {
 		this.roles = roles;
 	}
+	
+	
 
 }
